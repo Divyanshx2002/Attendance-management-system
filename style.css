@@ -1,19 +1,19 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url(https://wallpaperset.com/w/full/1/a/5/38314.jpg);
+    background-image: url(img/1234.png);
     background-size: cover;
 }
 
-.login{
+.login {
     width: 360px;
     height: min-content;
     padding: 20px;
@@ -21,23 +21,23 @@ body{
     background: #ffffff;
 }
 
-.login h1{
+.login h1 {
     font-size: 36px;
     margin-bottom: 25px;
 }
 
-.login form{
+.login form {
     font-size: 20px;
 }
 
-.login form .form-group{
+.login form .form-group {
     margin-bottom: 12px;
 }
 
-.login form input[type="submit"]{
+.login form input[type="submit"] {
     font-size: 20px;
 }
 
-#btn22 a{
+#btn22 a {
     font-size: 20px;
 }

@@ -8,16 +8,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
-    <title>Sign Up Page</title>
+    <title>Log In</title>
 </head>
 
 <body>
     <div class="login">
-        <h1 class="text-center">Sign Up</h1>
-        <form class="needs-validation" action="">
+        <h1 class="text-center">Log In</h1>
+        <form action="getdata.php" class="needs-validation" method="POST">
             <div class="form-group was-validated">
                 <lable class="form-label" for="text">Username</lable>
-                <input class="form-control" type="text" id="username" name="UserName" required>
+                <input class="form-control" type="text" id="username" name="user" required>
                 <div class="invalid-feedback">
                     Please enter your username
                 </div>
@@ -30,10 +30,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <input class="btn btn-success w-100" type="submit" id="sub" name="btn" value="Sign In" required>
-            </div>
-            <div class="form-group" id="btn22">
-                <a class="btn btn-success w-100" href="sec.php">Log In</a>
+                <input class="btn btn-success w-100" type="submit" id="sub" name="btn" value="Log In" required>
             </div>
         </form>
     </div>
