@@ -7,7 +7,7 @@ if ($result->num_rows > 0) {
     echo "Successfully Logged in";
     header("Location: http://localhost/Attendance-management-system/att.php");
 } else {
-    echo "login failed";
-    header("Location: http://localhost/Attendance-management-system/");
+    header("Location: http://localhost/Attendance-management-system/error.php");
+    echo "Nort";
 }
 $conn->close();
