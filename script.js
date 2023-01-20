@@ -6,13 +6,13 @@ inputBtn.addEventListener('click', function (e) {
     if (userName == "" && password == "") {
         errordisplay.innerHTML = "<span style='color: red;'>Username And Password Cannot Be Empty</span>";
         e.preventDefault();
-    }else if(userName == "") {
+    } else if (userName == "") {
         errordisplay.innerHTML = "<span style='color: red;'>Username Cannot Be Empty</span>";
         e.preventDefault();
-    }else if(password == "") {
+    } else if (password == "") {
         errordisplay.innerHTML = "<span style='color: red;'>Password Cannot Be Empty</span>";
         e.preventDefault();
-    }else{
+    } else {
         console.log('welcome');
     }
 

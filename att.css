@@ -5,4 +5,42 @@
 
 body {
     box-sizing: border-box;
+
+}
+
+.imgbac {
+    height: 100vh;
+    
+}
+
+.attendenceform{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.login {
+    width: 660px;
+    height: 300px;
+    padding: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    z-index: 999;
+}
+
+.attendance{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+
+#btttn{
+    margin-top: 16px;
+}
+
+.bcccck{
+    background-color:#E1EAF0; 
+    background-image: url(https://workinmind.org/wp-content/uploads/2019/07/is-there-still-a-place-for-the-traditional-office.jpg);
+    background-blend-mode: overlay;
 }
