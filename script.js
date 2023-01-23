@@ -11,8 +11,8 @@ inputBtn.addEventListener('click', function (e) {
         e.preventDefault();
     } else if (password == "") {
         errordisplay.innerHTML = "<span style='color: red;'>Password Cannot Be Empty</span>";
-        e.preventDefault();
-    } else {
+        e.preventDefault();   
+    }else {
         console.log('welcome');
     }
 

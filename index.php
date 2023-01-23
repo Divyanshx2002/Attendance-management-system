@@ -11,15 +11,32 @@
 </head>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script defer src="script.js"></script>
+<?php
+$error_msg = "";
+if (isset($_POST['btn'])) {
+    include 'connect.php';
+    $sql = "SELECT id, username, password FROM logininfo WHERE username = '" . $_POST['user'] . "' and password = '" . $_POST['pass'] . "'";
+
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        header("location: http://localhost/Attendance-management-system/att.php");
+    } else {
+        $error_msg = "no user found!";
+    }
+    $conn->close();
+}
+
+
+?>
 
 <body>
     <div class="login">
         <h1 class="text-center">Log In</h1>
-        <span class="errors"></span>
-        <form action="getdata.php" class="needs-validation" method="POST">
+        <span class="errors"><?php echo $error_msg; ?></span>
+        <form action="" class="needs-validation" method="POST">
             <div class="form-group">
-                <lable  class="form-label" for="text">Username</lable>
-                <input class="form-control" type="text" id="username" name="user" id="validationCustom01" required >
+                <lable class="form-label" for="text">Username</lable>
+                <input class="form-control" type="text" id="username" name="user" id="validationCustom01" required>
                 <div class="valid-feedback">Looks good!</div>
                 <div class="invalid-feedback">Please Enter Your Username</div>
             </div>
@@ -30,7 +47,7 @@
                 <div class="invalid-feedback">Please Enter Your Password</div>
             </div>
             <div class="form-group">
-                <button class="btn btn-success w-100" type="submit" id="sub" name="btn"  >Log In</button>
+                <button class="btn btn-success w-100" type="submit" id="sub" name="btn">Log In</button>
             </div>
         </form>
     </div>
