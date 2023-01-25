@@ -1,9 +1,9 @@
-*{
+* {
     padding: 0;
     margin: 0;
 }
 
-body{
+body {
     height: 100vh;
     display: flex;
     align-items: center;
@@ -14,18 +14,18 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
-.h1{
+.h1 {
     color: red;
 }
 
-.btl a{
-    color:red;
+.btl a {
+    color: red;
     text-decoration: none;
     border: 1px solid red;
     padding: 10px;
     border-radius: 10px;
 }
 
-.btl{
+.btl {
     margin-top: 20px;
 }

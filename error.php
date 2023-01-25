@@ -17,7 +17,7 @@
         <img src="img/aaaa.png" alt="">
     </div>
     <div class="h1">
-        <h1>Either Your Username Or Password Is Incorrect</h1>
+        <h1>s</h1>
     </div>
     <div class="btl">
         <a href="index.php">Back To Login Page</a>

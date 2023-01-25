@@ -10,10 +10,10 @@ body {
 
 .imgbac {
     height: 100vh;
-    
+
 }
 
-.attendenceform{
+.attendenceform {
     display: flex;
     flex-direction: column;
 
@@ -28,19 +28,19 @@ body {
     z-index: 999;
 }
 
-.attendance{
+.attendance {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 90vh;
 }
 
-#btttn{
+#btttn {
     margin-top: 16px;
 }
 
-.bcccck{
-    background-color:#E1EAF0; 
+.bcccck {
+    background-color: #E1EAF0;
     background-image: url(https://workinmind.org/wp-content/uploads/2019/07/is-there-still-a-place-for-the-traditional-office.jpg);
     background-blend-mode: overlay;
 }

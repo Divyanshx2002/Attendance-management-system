@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +24,7 @@ if (isset($_POST['btn'])) {
     if ($result->num_rows > 0) {
         header("location: http://localhost/Attendance-management-system/att.php");
     } else {
-        $error_msg = "no user found!";
+        $error_msg = "No User Found!";
     }
     $conn->close();
 }
@@ -32,7 +35,7 @@ if (isset($_POST['btn'])) {
 <body>
     <div class="login">
         <h1 class="text-center">Log In</h1>
-        <span class="errors"><?php echo $error_msg; ?></span>
+        <span class="errors"><span style='color: red;'><?php echo $error_msg; ?></span></span>
         <form action="" class="needs-validation" method="POST">
             <div class="form-group">
                 <lable class="form-label" for="text">Username</lable>

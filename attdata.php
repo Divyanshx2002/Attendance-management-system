@@ -7,5 +7,5 @@ if (isset($_POST['btn'])) {
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
-    $conn->close(); 
+    $conn->close();
 };

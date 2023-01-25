@@ -1,5 +1,11 @@
+<?php
+session_start();
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,6 +15,7 @@
     <title>Dashboard</title>
 </head>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
 <body>
     <section class="bcccck">
         <div class="container-fluid">
@@ -22,11 +29,6 @@
                             <li>
                                 <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                     <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Attendance</span> </a>
-                                <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                    <li>
-                                        <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Show</span> attendance</a>
-                                    </li>
-                                </ul>
                             </li>
                         </ul>
                         <hr>
@@ -36,6 +38,7 @@
                                 <span class="d-none d-sm-inline mx-1">Divyansh</a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow ">
                                 <li><a class="dropdown-item" href="index.php">Sign Out</a></li>
+                                <?php session_destroy() ?>
                             </ul>
                         </div>
                     </div>
@@ -67,4 +70,5 @@
         </div>
     </section>
 </body>
+
 </html>
