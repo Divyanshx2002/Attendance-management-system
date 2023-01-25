@@ -1,6 +1,6 @@
 <?php
 include 'connect.php';
-if (isset($_POST['submit'])) {
+if (isset($_POST['btn'])) {
     $sql = "INSERT INTO attrecord  (date, entrytime, exittime) VALUES  ('" . $_POST['date'] . "', '" . $_POST['Entime'] . "', '" . $_POST['Extime'] . "')";
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";

@@ -4,5 +4,7 @@ $sql = "SELECT id, username, password FROM logininfo WHERE username = '" . $_POS
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
-} 
+} else {
+    
+}
 $conn->close();
