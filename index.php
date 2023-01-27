@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,41 +17,45 @@ $error_msg = "";
 if (isset($_POST['btn'])) {
     include 'connect.php';
     $sql = "SELECT id, username, password FROM logininfo WHERE username = '" . $_POST['user'] . "' and password = '" . $_POST['pass'] . "'";
-
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
+        $_SESSION['username'] = $_POST['user'];
         header("location: http://localhost/Attendance-management-system/att.php");
     } else {
         $error_msg = "No User Found!";
     }
     $conn->close();
 }
-
-
 ?>
 
 <body>
-    <div class="login">
-        <h1 class="text-center">Log In</h1>
-        <span class="errors"><span style='color: red;'><?php echo $error_msg; ?></span></span>
-        <form action="" class="needs-validation" method="POST">
-            <div class="form-group">
-                <lable class="form-label" for="text">Username</lable>
-                <input class="form-control" type="text" id="username" name="user" id="validationCustom01" required>
-                <div class="valid-feedback">Looks good!</div>
-                <div class="invalid-feedback">Please Enter Your Username</div>
-            </div>
-            <div class="form-group">
-                <lable class="form-label" for="password">Password</lable>
-                <input class="form-control" type="password" id="password" name="pass" id="validationCustom02" required>
-                <div class="valid-feedback">Looks good!</div>
-                <div class="invalid-feedback">Please Enter Your Password</div>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-success w-100" type="submit" id="sub" name="btn">Log In</button>
-            </div>
-        </form>
-    </div>
+    <?php
+    if (!isset($_SESSION['username'])) { ?>
+        <div class="login">
+            <h1 class="text-center">Log In</h1>
+            <span class="errors"><span style='color: red;'><?php echo $error_msg; ?></span></span>
+            <form action="" class="needs-validation" method="POST">
+                <div class="form-group">
+                    <lable class="form-label" for="text">Username</lable>
+                    <input class="form-control" type="text" id="username" name="user" id="validationCustom01" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please Enter Your Username</div>
+                </div>
+                <div class="form-group">
+                    <lable class="form-label" for="password">Password</lable>
+                    <input class="form-control" type="password" id="password" name="pass" id="validationCustom02" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please Enter Your Password</div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success w-100" type="submit" id="sub" name="btn">Log In</button>
+                </div>
+            </form>
+        </div>
+    <?php } else {
+        header("location: att.php");
+    }
+    ?>
 </body>
 
 </html>
