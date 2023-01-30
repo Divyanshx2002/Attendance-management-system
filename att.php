@@ -15,10 +15,59 @@
 
 <body>
     <?php
+    include 'connect.php';
+    if (isset($_POST['dasboard-btn'])) {
+        $sql = "INSERT INTO attrecord  (entrytime, exittime) VALUES  ( '" . $_POST['Entime'] . "', '" . $_POST['Extime'] . "')";
+        if ($conn->query($sql) === TRUE) {
+            echo "";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        $conn->close();
+    ?>
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 50%;
+                margin: 0px auto;
+                position: fixed;
+                top: 300px;
+                left: 600px;
+            }
+
+            td,
+            th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+        <div class="hidden-table">
+            <table hidden>
+                <tr>
+                    <th>Entime</th>
+                    <th>Extime</th>
+
+                </tr>
+                <tr>
+                    <td class="sdfsdf"><?php echo $_POST['Entime']; ?> </td>
+                    <td><?php echo $_POST['Extime']; ?></td>
+
+                </tr>
+            </table>
+        </div>
+    <?php } ?>
+
+    <?php
     if (!isset($_SESSION['username'])) {
         header("location: index.php");
-    } else { ?>
-
+    } else {
+    ?>
         <section class="bcccck">
             <div class="container-fluid">
                 <div class="row flex-nowrap">
@@ -32,39 +81,44 @@
                                     <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                         <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Attendance</span> </a>
                                 </li>
+                                <div class="anc">
+                                    <p id="playop"> Show attendance</a>
+
+                                </div>
                             </ul>
+
                             <hr>
                             <div class="dropdown pb-4">
                                 <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                    <span class="d-none d-sm-inline mx-1">Divyansh</a>
+                                    <span class="d-none d-sm-inline mx-1">Divyansh
+                                </a>
                                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow ">
                                     <li>
                                         <button><a href="http://localhost/Attendance-management-system/logout.php">Logout</a></button>
                                     </li>
                                 </ul>
                             </div>
-                            <form>
                         </div>
                     </div>
                     <div class="col py-3">
                         <div class="attendance">
-                            <div class="login">
-                                <form action="attdata.php" class="needs-validation" method="POST">
-                                    <div class="form-group">
-                                        <lable class="form-label" for="date">Date</lable>
-                                        <input class="form-control" type="date" id="Date" name="date" id="validationCustom01">
-                                    </div>
+
+                            <div class="login" id="byebye">
+                                <form action="" class="needs-validation" method="POST">
+                                    <?php
+                                    echo "Date : " . date("Y/m/d") . "<br>";
+                                    ?>
                                     <div class="form-group">
                                         <lable class="form-label" for="enttime">Entry Time</lable>
-                                        <input class="form-control" type="time" id="entry" name="Entime" id="validationCustom02">
+                                        <input class="form-control" type="time" id="entry" name="Entime" required>
                                     </div>
                                     <div class="form-group">
                                         <lable class="form-label" for="exttime">Exit Time</lable>
-                                        <input class="form-control" type="time" id="exit" name="Extime" id="validationCustom02">
+                                        <input class="form-control" type="time" id="exit" name="Extime" required>
                                     </div>
                                     <div class="form-group" id="btttn">
-                                        <button class="btn btn-success w-100" type="submit" id="sub" name="btn">Submit</button>
+                                        <button class="btn btn-success w-100" type="submit" id="sub" name="dasboard-btn">Submit</button>
                                     </div>
                                 </form>
                             </div>
@@ -73,8 +127,24 @@
                 </div>
             </div>
         </section>
-    <?php }
-    ?>
+    <?php } ?>
+    <script>
+        let playbtn = document.querySelector('#playop');
+        let formsec = document.querySelector('#byebye');
+
+        playbtn.addEventListener('click', function() {
+            formsec.style.display = "none";
+
+            function showtable1() {
+                let hidden = document.querySelector('.hidden-table');
+                if (hidden.style.display === "none") {
+                    hidden.style.display = "block";
+                } else {
+                    hidden.style.display = "none";
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
