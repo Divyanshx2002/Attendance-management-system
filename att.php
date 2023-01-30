@@ -15,55 +15,18 @@
 
 <body>
     <?php
+    $table = "";
     include 'connect.php';
     if (isset($_POST['dasboard-btn'])) {
         $sql = "INSERT INTO attrecord  (entrytime, exittime) VALUES  ( '" . $_POST['Entime'] . "', '" . $_POST['Extime'] . "')";
         if ($conn->query($sql) === TRUE) {
-            echo "";
+            $table = "Submission Successfull";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
         $conn->close();
-    ?>
-        <style>
-            table {
-                font-family: arial, sans-serif;
-                border-collapse: collapse;
-                width: 50%;
-                margin: 0px auto;
-                position: fixed;
-                top: 300px;
-                left: 600px;
-            }
+    }
 
-            td,
-            th {
-                border: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-            }
-
-            tr:nth-child(even) {
-                background-color: #dddddd;
-            }
-        </style>
-        <div class="hidden-table">
-            <table hidden>
-                <tr>
-                    <th>Entime</th>
-                    <th>Extime</th>
-
-                </tr>
-                <tr>
-                    <td class="sdfsdf"><?php echo $_POST['Entime']; ?> </td>
-                    <td><?php echo $_POST['Extime']; ?></td>
-
-                </tr>
-            </table>
-        </div>
-    <?php } ?>
-
-    <?php
     if (!isset($_SESSION['username'])) {
         header("location: index.php");
     } else {
@@ -105,6 +68,7 @@
                         <div class="attendance">
 
                             <div class="login" id="byebye">
+                               <span><?php echo $table; ?></span>
                                 <form action="" class="needs-validation" method="POST">
                                     <?php
                                     echo "Date : " . date("Y/m/d") . "<br>";
