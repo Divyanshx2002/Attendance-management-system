@@ -16,10 +16,15 @@
 $error_msg = "";
 if (isset($_POST['btn'])) {
     include 'connect.php';
-    $sql = "SELECT id, username, password FROM logininfo WHERE username = '" . $_POST['user'] . "' and password = '" . $_POST['pass'] . "'";
+    $sql = "SELECT ID, username, password FROM logininfo WHERE username = '" . $_POST['user'] . "' and  password = '" . $_POST['pass'] . "'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
-        $_SESSION['username'] = $_POST['user'];
+
+        $row = mysqli_fetch_assoc($result);
+        $user_id =  $row['ID'];
+        $user_name =  $row['username'];
+        $_SESSION['username'] = $user_name;
+        $_SESSION['ID'] = $user_id;
         header("location: http://localhost/Attendance-management-system/att.php");
     } else {
         $error_msg = "No User Found!";

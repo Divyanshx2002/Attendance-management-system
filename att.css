@@ -46,7 +46,7 @@ body {
     background-blend-mode: overlay;
 }
 
-.anc p{
+.anc a{
     text-decoration: none;
     color: #0d6efd;
     cursor: pointer;

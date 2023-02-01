@@ -18,10 +18,10 @@
     $table = "";
     include 'connect.php';
     if (isset($_POST['dasboard-btn'])) {
-        $sql = "INSERT INTO attrecord  (entrytime, exittime) VALUES  ( '" . $_POST['Entime'] . "', '" . $_POST['Extime'] . "')";
+        $sql = "INSERT INTO attrecord  ( userid, date, entrytime, exittime) VALUES  ('" .$_SESSION['ID'] . "','" . date("Y/m/d") . "','" . $_POST['Entime'] . "', '" . $_POST['Extime'] . "')";
         if ($conn->query($sql) === TRUE) {
             $table = "Submission Successfull";
-        } else {
+        } else {                                                                        
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
         $conn->close();
@@ -45,8 +45,7 @@
                                         <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Attendance</span> </a>
                                 </li>
                                 <div class="anc">
-                                    <p id="playop"> Show attendance</a>
-
+                                <a href="http://localhost/Attendance-management-system/show.php">Show Attendance</a>
                                 </div>
                             </ul>
 
@@ -54,7 +53,7 @@
                             <div class="dropdown pb-4">
                                 <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                    <span class="d-none d-sm-inline mx-1">Divyansh
+                                    <span class="d-none d-sm-inline mx-1"><?php echo  $_SESSION['username']; ?>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow ">
                                     <li>
@@ -71,7 +70,8 @@
                                <span><?php echo $table; ?></span>
                                 <form action="" class="needs-validation" method="POST">
                                     <?php
-                                    echo "Date : " . date("Y/m/d") . "<br>";
+                                    $todaydate =  "Date : " . date("Y/m/d") . "<br>"; 
+                                    echo $todaydate;
                                     ?>
                                     <div class="form-group">
                                         <lable class="form-label" for="enttime">Entry Time</lable>
@@ -92,7 +92,7 @@
             </div>
         </section>
     <?php } ?>
-    <script>
+    <!-- <script>
         let playbtn = document.querySelector('#playop');
         let formsec = document.querySelector('#byebye');
 
@@ -108,7 +108,7 @@
                 }
             }
         });
-    </script>
+    </script> -->
 </body>
 
 </html>
