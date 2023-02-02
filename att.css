@@ -46,9 +46,13 @@ body {
     background-blend-mode: overlay;
 }
 
-.anc a{
+.anc li p{
     text-decoration: none;
     color: #0d6efd;
     cursor: pointer;
+}
+
+#example{
+    background-color: #E1EAF0;
 }
 

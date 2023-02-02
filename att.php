@@ -8,20 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="att.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+    <script defer src="apd.js"></script>
 </head>
-<script defer src="opop.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 <body>
     <?php
     $table = "";
     include 'connect.php';
     if (isset($_POST['dasboard-btn'])) {
-        $sql = "INSERT INTO attrecord  ( userid, date, entrytime, exittime) VALUES  ('" .$_SESSION['ID'] . "','" . date("Y/m/d") . "','" . $_POST['Entime'] . "', '" . $_POST['Extime'] . "')";
+        $sql = "INSERT INTO attrecord  ( userid, date, entrytime, exittime) VALUES  ('" . $_SESSION['ID'] . "','" . date("d/m/y") . "','" . $_POST['Entime'] . "', '" . $_POST['Extime'] . "')";
         if ($conn->query($sql) === TRUE) {
             $table = "Submission Successfull";
-        } else {                                                                        
+        } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
         $conn->close();
@@ -42,10 +42,12 @@
                             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                                 <li>
                                     <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                        <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Attendance</span> </a>
+                                        <i class="fs-4 bi-speedometer2"></i> <span id="opopop" class="ms-1 d-none d-sm-inline">Attendance</span> </a>
                                 </li>
                                 <div class="anc">
-                                <a href="http://localhost/Attendance-management-system/show.php">Show Attendance</a>
+                                    <li>
+                                        <p id="playop"> Show Attendance </p>
+                                    <li>
                                 </div>
                             </ul>
 
@@ -65,12 +67,11 @@
                     </div>
                     <div class="col py-3">
                         <div class="attendance">
-
                             <div class="login" id="byebye">
-                               <span><?php echo $table; ?></span>
+                                <span><?php echo $table; ?></span>
                                 <form action="" class="needs-validation" method="POST">
                                     <?php
-                                    $todaydate =  "Date : " . date("Y/m/d") . "<br>"; 
+                                    $todaydate =  "Date : " . date("d-m-y") . "<br>";
                                     echo $todaydate;
                                     ?>
                                     <div class="form-group">
@@ -87,28 +88,62 @@
                                 </form>
                             </div>
                         </div>
+                        <div id="records2">
+                            <?php
+                            include 'connect.php';
+                            if (isset($_SESSION['ID'])) {
+                                $sql = "SELECT * FROM attrecord WHERE userid = '" .  $_SESSION['ID'] . "'";
+                                $result = $conn->query($sql);
+                                if ($result->num_rows > 0) {
+                                    // header("location: att.php");
+                                    while ($row = $result->fetch_assoc()) { ?>
+                                        <style>
+                                            table {
+                                                font-family: arial, sans-serif;
+                                                border-collapse: collapse;
+                                                width: 100%;
+                                                background-color: whitesmoke;
+                                            }
+
+                                            td,
+                                            th {
+                                                border: 1px solid #dddddd;
+                                                text-align: left;
+                                                padding: 8px;
+                                            }
+
+                                            tr:nth-child(even) {
+                                                background-color: #dddddd;
+                                            }
+                                        </style>
+                                        <table id="example" class="display" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Entry Time</th>
+                                                    <th>Exit Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><?php echo   $row["date"] . "<br>"; ?></td>
+                                                    <td><?php echo   $row["entrytime"] . "<br>"; ?></td>
+                                                    <td><?php echo   $row["exittime"] . "<br>"; ?></td>
+                                                </tr>
+                                    <?php   }
+                                } else {
+                                    echo "0 results";
+                                }
+                                $conn->close();
+                            }
+
+                                    ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     <?php } ?>
-    <!-- <script>
-        let playbtn = document.querySelector('#playop');
-        let formsec = document.querySelector('#byebye');
-
-        playbtn.addEventListener('click', function() {
-            formsec.style.display = "none";
-
-            function showtable1() {
-                let hidden = document.querySelector('.hidden-table');
-                if (hidden.style.display === "none") {
-                    hidden.style.display = "block";
-                } else {
-                    hidden.style.display = "none";
-                }
-            }
-        });
-    </script> -->
 </body>
 
 </html>
