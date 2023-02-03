@@ -13,32 +13,32 @@ body {
     background-size: cover;
 }
 
-.login {
-    width: 360px;
+.editprofile {
+    width: 460px;
     height: min-content;
     padding: 20px;
     border-radius: 12px;
     background: #ffffff;
 }
 
-.login h1 {
+.editprofile h1 {
     font-size: 36px;
     margin-bottom: 25px;
 }
 
-.login form {
+.editprofile form {
     font-size: 20px;
 }
 
-.login form .form-group {
+.editprofile form .form-group {
     margin-bottom: 12px;
 }
 
-.login form input[type="submit"] {
+.editprofile form input[type="submit"] {
     font-size: 20px;
 }
 
-#btn22 a {
+#subBtn a {
     font-size: 20px;
 }
 

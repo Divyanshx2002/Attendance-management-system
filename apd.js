@@ -8,8 +8,11 @@ showAtt.addEventListener('click', function () {
     displayNone.style.display = "block";
 });
 
-// let btnop = document.querySelector('#opopop');
-// btnop.addEventListener('click', function () {
-//     displayNone.style.display = "none";
-//     ourAtt.style.display = "block";
-// });
+let displayNone2 = document.querySelector("#editprofile");
+displayNone2.style.display = "none";
+
+let showAtt2 = document.querySelector('#playop2');
+showAtt2.addEventListener('click', function(){
+    ourAtt.style.display = "none";
+    displayNone2.style.display = "block";
+});

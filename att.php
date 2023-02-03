@@ -8,9 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="att.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
     <script defer src="apd.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+
+
 </head>
 
 <body>
@@ -40,9 +45,8 @@
                                 <span class="fs-5 d-none d-sm-inline"><img src="img/qqqqqq.png" alt=""></span>
                             </a>
                             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                                <li>
-                                    <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                                        <i class="fs-4 bi-speedometer2"></i> <span id="opopop" class="ms-1 d-none d-sm-inline">Attendance</span> </a>
+                                <li class="noO">
+                                    <a href="att.php"><i class="fs-4 bi-speedometer2"></i> <span id="opopop" class="ms-1 d-none d-sm-inline">Attendance</span> </a>
                                 </li>
                                 <div class="anc">
                                     <li>
@@ -58,8 +62,13 @@
                                     <span class="d-none d-sm-inline mx-1"><?php echo  $_SESSION['username']; ?>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark text-small shadow ">
-                                    <li>
+                                    <li class="gonnaedit">
                                         <button><a href="http://localhost/Attendance-management-system/logout.php">Logout</a></button>
+                                    </li>
+                                    <li class="gonnaedit">
+                                        <button id="playop2">
+                                            <p>Edit Profile</p>
+                                        </button>
                                     </li>
                                 </ul>
                             </div>
@@ -88,61 +97,69 @@
                                 </form>
                             </div>
                         </div>
-                        <div id="records2">
-                            <?php
+
+                        <div id="editprofile">
+                            <?php 
                             include 'connect.php';
-                            if (isset($_SESSION['ID'])) {
-                                $sql = "SELECT * FROM attrecord WHERE userid = '" .  $_SESSION['ID'] . "'";
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    // header("location: att.php");
-                                    while ($row = $result->fetch_assoc()) { ?>
-                                        <style>
-                                            table {
-                                                font-family: arial, sans-serif;
-                                                border-collapse: collapse;
-                                                width: 100%;
-                                                background-color: whitesmoke;
-                                            }
 
-                                            td,
-                                            th {
-                                                border: 1px solid #dddddd;
-                                                text-align: left;
-                                                padding: 8px;
-                                            }
+                            
+                            ?>
+                            <h1 class="text-center">Edit Profile</h1>
 
-                                            tr:nth-child(even) {
-                                                background-color: #dddddd;
-                                            }
-                                        </style>
-                                        <table id="example" class="display" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>Entry Time</th>
-                                                    <th>Exit Time</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><?php echo   $row["date"] . "<br>"; ?></td>
-                                                    <td><?php echo   $row["entrytime"] . "<br>"; ?></td>
-                                                    <td><?php echo   $row["exittime"] . "<br>"; ?></td>
-                                                </tr>
-                                    <?php   }
-                                } else {
-                                    echo "0 results";
+                            <form action="" class="needs-validation" method="POST">
+                                <div class="form-group">
+                                    <lable class="form-label" for="text">Name</lable>
+                                    <input class="form-control" type="text" id="name" name="name" id="validationCustom06" required>
+                                </div>
+                                <div class="form-group">
+                                    <lable class="form-label" for="text">Username</lable>
+                                    <input class="form-control" type="text" id="userName" name="userName" id="validationCustom07" required>
+                                </div>
+                                <div class="form-group">
+                                    <lable class="form-label" for="text">Password</lable>
+                                    <input class="form-control" type="password" id="passWord" name="passWord" id="validationCustom08" required>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-success w-100" type="submit" id="subBtn" name="subBtn">Update Now</button>
+                                </div>
+                        </div>
+
+                        <div id="records2">
+                            <table id="example" class="display" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Entry Time</th>
+                                        <th>Exit Time</th>
+                                    </tr>
+                                </thead>
+                                <?php
+                                include 'connect.php';
+                                if (isset($_SESSION['ID'])) {
+                                    $sql = "SELECT * FROM attrecord WHERE userid = '" .  $_SESSION['ID'] . "'";
+                                    $result = $conn->query($sql);
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) { ?>
+                                        <?php echo "<tr><td>{$row['date']}</td><td>{$row['entrytime']}</td><td>{$row['exittime']}</td></tr>\n";
+                                        } ?>
+                                <?php
+                                    } else {
+                                        echo "0 results";
+                                    }
+                                    $conn->close();
                                 }
-                                $conn->close();
-                            }
 
-                                    ?>
+                                ?>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <script>
+            jQuery(document).ready(function() {
+                jQuery('#example').DataTable();
+            });
+        </script>
     <?php } ?>
 </body>
 

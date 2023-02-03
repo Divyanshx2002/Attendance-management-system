@@ -56,3 +56,33 @@ body {
     background-color: #E1EAF0;
 }
 
+.noO a{
+    text-decoration: none;
+}
+
+.gonnaedit button {
+    background-color: #343a40;
+    border: 1px solid #343a40;
+}
+
+.gonnaedit a{
+    color: white;
+     text-decoration: none;
+}
+
+#playop2 p{
+    margin: 0;
+    color: white;
+}
+
+#editprofile{
+    height: 100vh;
+    background-color: white;
+    width: 360px;
+    height: min-content;
+    padding: 20px;
+    border-radius: 12px;
+    position: fixed;
+    top: 260px;
+    right: 650px;
+}
