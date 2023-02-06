@@ -16,7 +16,7 @@
 $error_msg = "";
 if (isset($_POST['btn'])) {
     include 'connect.php';
-    $sql = "SELECT ID, name, username, password FROM logininfo WHERE name = '" . $_POST['Name'] . "' and username = '" . $_POST['user'] . "' and  password = '" . $_POST['pass'] . "'";
+    $sql = "SELECT ID, username, password FROM logininfo WHERE  username = '" . $_POST['user'] . "' and  password = '" . $_POST['pass'] . "'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
 
@@ -40,12 +40,6 @@ if (isset($_POST['btn'])) {
             <h1 class="text-center">Log In</h1>
             <span class="errors"><span style='color: red;'><?php echo $error_msg; ?></span></span>
             <form action="" class="needs-validation" method="POST">
-            <div class="form-group">
-                    <lable class="form-label" for="text">Name</lable>
-                    <input class="form-control" type="text" id="Name" name="Name" id="validationCustom00" required>
-                    <div class="valid-feedback">Looks good!</div>
-                    <div class="invalid-feedback">Please Enter Your Name</div>
-                </div>
                 <div class="form-group">
                     <lable class="form-label" for="text">Username</lable>
                     <input class="form-control" type="text" id="username" name="user" id="validationCustom01" required>
