@@ -99,20 +99,26 @@
                         </div>
 
                         <div id="editprofile">
-                            <?php 
+                            <?php
                             include 'connect.php';
-                            
+                            $sql = "SELECT * FROM logininfo WHERE ID = '" .  $_SESSION['ID'] . "'";
+                            $result = $conn->query($sql);
+                            if ($row = $result->fetch_assoc()) {
+                                $row["ID"];
+                                $row["name"];
+                                $row["username"];
+                                $row["password"];
+                            }
                             ?>
                             <h1 class="text-center">Edit Profile</h1>
-
                             <form action="" class="needs-validation" method="POST">
                                 <div class="form-group">
                                     <lable class="form-label" for="text">Name</lable>
-                                    <input class="form-control" type="text" id="name" name="name" id="validationCustom06" required>
+                                    <input class="form-control" type="text" id="name" value="<?php echo $row["name"]; ?>" name="newname" id="validationCustom06" required>
                                 </div>
                                 <div class="form-group">
                                     <lable class="form-label" for="text">Username</lable>
-                                    <input class="form-control" type="text" id="userName" name="userName" id="validationCustom07" required>
+                                    <input class="form-control" type="text" id="userName" value="<?php echo $row["username"]; ?>" name="userName" id="validationCustom07" required>
                                 </div>
                                 <div class="form-group">
                                     <lable class="form-label" for="text">Password</lable>
@@ -122,6 +128,18 @@
                                     <button class="btn btn-success w-100" type="submit" id="subBtn" name="subBtn">Update Now</button>
                                 </div>
                         </div>
+                        <?php
+                        include 'connect.php';
+                        if (isset($_POST['subBtn'])) {
+                            $newname = $_POST['newname'];
+                            $newusername = $_POST['userName'];
+                            $userid = $_SESSION['ID'];
+                            $result = $conn->query($sql);
+                            $sql = "UPDATE logininfo SET name = '$newname', username ='$newusername'  WHERE ID = '$userid'";
+                            $res = $conn->query($sql);
+                        }
+                        $conn->close();
+                        ?>
 
                         <div id="records2">
                             <table id="example" class="display" style="width:100%">
