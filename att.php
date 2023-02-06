@@ -23,7 +23,7 @@
     $table = "";
     include 'connect.php';
     if (isset($_POST['dasboard-btn'])) {
-        $sql = "INSERT INTO attrecord  ( userid, date, entrytime, exittime) VALUES  ('" . $_SESSION['ID'] . "','" . date("d/m/y") . "','" . $_POST['Entime'] . "', '" . $_POST['Extime'] . "')";
+        $sql = "INSERT INTO attrecord  ( userid, date, entrytime, exittime) VALUES  ('" . $_SESSION['ID'] . "','" . date("y/m/d") . "','" . $_POST['Entime'] . "', '" . $_POST['Extime'] . "')";
         if ($conn->query($sql) === TRUE) {
             $table = "Submission Successfull";
         } else {
@@ -101,7 +101,6 @@
                         <div id="editprofile">
                             <?php 
                             include 'connect.php';
-
                             
                             ?>
                             <h1 class="text-center">Edit Profile</h1>
