@@ -16,15 +16,17 @@
 $error_msg = "";
 if (isset($_POST['btn'])) {
     include 'connect.php';
-    $sql = "SELECT ID, username, password FROM logininfo WHERE  username = '" . $_POST['user'] . "' and  password = '" . $_POST['pass'] . "'";
+    $sql = "SELECT * FROM logininfo WHERE  username = '" . $_POST['user'] . "' and  password = '" . $_POST['pass'] . "'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
 
         $row = mysqli_fetch_assoc($result);
         $user_id =  $row['ID'];
+        $role = $row['Role'];
         $user_name =  $row['username'];
         $_SESSION['username'] = $user_name;
         $_SESSION['ID'] = $user_id;
+        $_SESSION['accessLevel'] = $role;
         header("location: http://localhost/Attendance-management-system/att.php");
     } else {
         $error_msg = "No User Found!";
@@ -37,7 +39,7 @@ if (isset($_POST['btn'])) {
     <?php
     if (!isset($_SESSION['username'])) { ?>
         <div class="login">
-            <h1 class="text-center">Log In</h1>
+            <h1 class="text-center">User Log In</h1>
             <span class="errors"><span style='color: red;'><?php echo $error_msg; ?></span></span>
             <form action="" class="needs-validation" method="POST">
                 <div class="form-group">

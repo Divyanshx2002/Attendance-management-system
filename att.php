@@ -171,6 +171,11 @@
                     </div>
                 </div>
             </div>
+            <?php  if (isset($_SESSION['username']) && $_SESSION['accessLevel'] == 'admin') {
+                header("location:../adminpage.php");
+            } else {
+               header("location:../index.php");
+            } ?>
         </section>
         <script>
             jQuery(document).ready(function() {
@@ -178,6 +183,7 @@
             });
         </script>
     <?php } ?>
+
 </body>
 
 </html>
