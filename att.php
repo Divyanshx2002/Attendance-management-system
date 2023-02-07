@@ -21,6 +21,7 @@
 <body>
     <?php
     $table = "";
+    $userRole = "";
     include 'connect.php';
     if (isset($_POST['dasboard-btn'])) {
         $sql = "INSERT INTO attrecord  ( userid, date, entrytime, exittime) VALUES  ('" . $_SESSION['ID'] . "','" . date("y/m/d") . "','" . $_POST['Entime'] . "', '" . $_POST['Extime'] . "')";
@@ -35,6 +36,11 @@
     if (!isset($_SESSION['username'])) {
         header("location: index.php");
     } else {
+        $sql = "SELECT * FROM logininfo WHERE ID = '" .  $_SESSION['ID'] . "'";
+        $result = $conn->query($sql);
+        if ($row = $result->fetch_assoc()) {
+            $userRole = $row["Role"];
+        };
     ?>
         <section class="bcccck">
             <div class="container-fluid">
@@ -45,33 +51,47 @@
                                 <span class="fs-5 d-none d-sm-inline"><img src="img/qqqqqq.png" alt=""></span>
                             </a>
                             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                                <li class="noO">
-                                    <a href="att.php"><i class="fs-4 bi-speedometer2"></i> <span id="opopop" class="ms-1 d-none d-sm-inline">Attendance</span> </a>
-                                </li>
-                                <div class="anc">
-                                    <li>
-                                        <p id="playop"> Show Attendance </p>
-                                    <li>
-                                </div>
-                            </ul>
+                                <?php
+                                if ($userRole != "" && $userRole == "admin") { ?>
+                                    <li class="noO">
+                                        <a href="#"><i class="fs-4 bi-speedometer2"></i> <span id="opopop" class="ms-1 d-none d-sm-inline">Add User</span> </a>
+                                    </li>
+                                    <div class="anc">
+                                        <li>
+                                            <p id="playop2"> Show Users </p>
+                                        <li>
+                                    </div>
+                                <?php } elseif ($userRole != "" && $userRole == "employ") { ?>
+                                    <li class="noO">
+                                        <a href="att.php"><i class="fs-4 bi-speedometer2"></i> <span id="opopop" class="ms-1 d-none d-sm-inline">Attendance</span> </a>
+                                    </li>
+                                    <div class="anc">
+                                        <li>
+                                            <p id="playop"> Show Attendance </p>
+                                        <li>
+                                    </div>
+                                <?php } else {
+                                    // Nothing to do 
+                                } ?>
 
-                            <hr>
-                            <div class="dropdown pb-4">
-                                <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                    <span class="d-none d-sm-inline mx-1"><?php echo  $_SESSION['username']; ?>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-dark text-small shadow ">
-                                    <li class="gonnaedit">
-                                        <button><a href="http://localhost/Attendance-management-system/logout.php">Logout</a></button>
-                                    </li>
-                                    <li class="gonnaedit">
-                                        <button id="playop2">
-                                            <p>Edit Profile</p>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
+
+                                <hr>
+                                <div class="dropdown pb-4">
+                                    <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                                        <span class="d-none d-sm-inline mx-1"><?php echo  $_SESSION['username']; ?>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow ">
+                                        <li class="gonnaedit">
+                                            <button><a href="http://localhost/Attendance-management-system/logout.php">Logout</a></button>
+                                        </li>
+                                        <li class="gonnaedit">
+                                            <button id="playop2">
+                                                <p>Edit Profile</p>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
                         </div>
                     </div>
                     <div class="col py-3">
@@ -171,11 +191,6 @@
                     </div>
                 </div>
             </div>
-            <?php  if (isset($_SESSION['username']) && $_SESSION['accessLevel'] == 'admin') {
-                header("location:../adminpage.php");
-            } else {
-               header("location:../index.php");
-            } ?>
         </section>
         <script>
             jQuery(document).ready(function() {
