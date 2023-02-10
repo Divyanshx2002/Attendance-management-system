@@ -16,3 +16,4 @@ showAtt2.addEventListener('click', function(){
     ourAtt.style.display = "none";
     displayNone2.style.display = "block";
 });
+

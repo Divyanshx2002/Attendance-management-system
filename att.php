@@ -20,19 +20,7 @@
 
 <body>
     <?php
-    $table = "";
-    $userRole = "";
     include 'connect.php';
-    if (isset($_POST['dasboard-btn'])) {
-        $sql = "INSERT INTO attrecord  ( userid, date, entrytime, exittime) VALUES  ('" . $_SESSION['ID'] . "','" . date("y/m/d") . "','" . $_POST['Entime'] . "', '" . $_POST['Extime'] . "')";
-        if ($conn->query($sql) === TRUE) {
-            $table = "Submission Successfull";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-        $conn->close();
-    }
-
     if (!isset($_SESSION['username'])) {
         header("location: index.php");
     } else {
@@ -54,12 +42,68 @@
                                 <?php
                                 if ($userRole != "" && $userRole == "admin") { ?>
                                     <li class="noO">
-                                        <a href="#"><i class="fs-4 bi-speedometer2"></i> <span id="opopop" class="ms-1 d-none d-sm-inline">Add User</span> </a>
+                                        <a href="http://localhost/Attendance-management-system/att.php"><i class="fs-4 bi-speedometer2"></i> <span id="adminadd" class="ms-1 d-none d-sm-inline">Add User</span> </a>
                                     </li>
                                     <div class="anc">
+                                        <li id="li2">
+                                            <a href="showuser.php">Show User</a>
                                         <li>
-                                            <p id="playop2"> Show Users </p>
-                                        <li>
+                                    </div>
+
+                                    <div class="dropdown pb-4" id="op221">
+                                        <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                                            <span class="d-none d-sm-inline mx-1"><?php echo  $_SESSION['username']; ?>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow ">
+                                            <li class="gonnaedit">
+                                                <button><a href="http://localhost/Attendance-management-system/logout.php">Logout</a></button>
+                                            </li>
+                                            <li class="gonnaedit">
+                                                <button id="playop2">
+                                                    <p>Edit Profile</p>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col py-3" id="formAddUser">
+                                        <div class="addingUser">
+                                            <div class="adduser" id="adminadd">
+                                                <form action="" class="needs-validation" method="POST">
+                                                    <div class="form-group">
+                                                        <lable class="form-label" for="">Name</lable>
+                                                        <input class="form-control" type="text" id="entry" name="name" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <lable class="form-label" for="">Username</lable>
+                                                        <input class="form-control" type="text" id="exit" name="username" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <lable class="form-label" for="">Password</lable>
+                                                        <input class="form-control" type="password" id="exit" name="password" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <lable class="form-label" for="">Role</lable>
+                                                        <input class="form-control" type="text" id="exit" value="employ" name="Role" required>
+                                                    </div>
+                                                    <div class="form-group" id="btn1">
+                                                        <button class="btn btn-success w-100" type="submit" id="subbtn" name="dasboard-btn">Submit</button>
+                                                    </div>
+                                                </form>
+                                                <?php
+                                                include 'connect.php';
+                                                if (isset($_POST['dasboard-btn'])) {
+                                                    $sql = "INSERT INTO logininfo (name, username, password, Role) VALUES ('" . $_POST['name'] . "','" . $_POST['username'] . "','" . $_POST['password'] . "','" . $_POST['Role'] . "')";
+                                                    if ($conn->query($sql) === TRUE) {
+                                                        echo "Submission Successfull ";
+                                                    } else {
+                                                        echo "Error: " . $sql . "<br>" . $conn->error;
+                                                    }
+                                                    $conn->close();
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
                                     </div>
                                 <?php } elseif ($userRole != "" && $userRole == "employ") { ?>
                                     <li class="noO">
@@ -70,30 +114,38 @@
                                             <p id="playop"> Show Attendance </p>
                                         <li>
                                     </div>
-                                <?php } else {
-                                    // Nothing to do 
-                                } ?>
-
-
-                                <hr>
-                                <div class="dropdown pb-4">
-                                    <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                        <span class="d-none d-sm-inline mx-1"><?php echo  $_SESSION['username']; ?>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow ">
-                                        <li class="gonnaedit">
-                                            <button><a href="http://localhost/Attendance-management-system/logout.php">Logout</a></button>
-                                        </li>
-                                        <li class="gonnaedit">
-                                            <button id="playop2">
-                                                <p>Edit Profile</p>
-                                            </button>
-                                        </li>
-                                    </ul>
-                                </div>
+                                    <hr>
+                                    <div class="dropdown pb-4" id="op441">
+                                        <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                                            <span class="d-none d-sm-inline mx-1"><?php echo  $_SESSION['username']; ?>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow ">
+                                            <li class="gonnaedit">
+                                                <button><a href="http://localhost/Attendance-management-system/logout.php">Logout</a></button>
+                                            </li>
+                                            <li class="gonnaedit">
+                                                <button id="playop2">
+                                                    <p>Edit Profile</p>
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
                         </div>
                     </div>
+                    <?php $table = "";
+                                    $userRole = "";
+                                    include 'connect.php';
+                                    if (isset($_POST['dasboard-btn'])) {
+                                        $sql = "INSERT INTO attrecord  ( userid, date, entrytime, exittime) VALUES  ('" . $_SESSION['ID'] . "','" . date("y/m/d") . "','" . $_POST['Entime'] . "', '" . $_POST['Extime'] . "')";
+                                        if ($conn->query($sql) === TRUE) {
+                                            $table = "Submission Successfull";
+                                        } else {
+                                            echo "Error: " . $sql . "<br>" . $conn->error;
+                                        }
+                                        $conn->close();
+                                    }
+                    ?>
                     <div class="col py-3">
                         <div class="attendance">
                             <div class="login" id="byebye">
@@ -120,15 +172,15 @@
 
                         <div id="editprofile">
                             <?php
-                            include 'connect.php';
-                            $sql = "SELECT * FROM logininfo WHERE ID = '" .  $_SESSION['ID'] . "'";
-                            $result = $conn->query($sql);
-                            if ($row = $result->fetch_assoc()) {
-                                $row["ID"];
-                                $row["name"];
-                                $row["username"];
-                                $row["password"];
-                            }
+                                    include 'connect.php';
+                                    $sql = "SELECT * FROM logininfo WHERE ID = '" .  $_SESSION['ID'] . "'";
+                                    $result = $conn->query($sql);
+                                    if ($row = $result->fetch_assoc()) {
+                                        $row["ID"];
+                                        $row["name"];
+                                        $row["username"];
+                                        $row["password"];
+                                    }
                             ?>
                             <h1 class="text-center">Edit Profile</h1>
                             <form action="" class="needs-validation" method="POST">
@@ -149,16 +201,16 @@
                                 </div>
                         </div>
                         <?php
-                        include 'connect.php';
-                        if (isset($_POST['subBtn'])) {
-                            $newname = $_POST['newname'];
-                            $newusername = $_POST['userName'];
-                            $userid = $_SESSION['ID'];
-                            $result = $conn->query($sql);
-                            $sql = "UPDATE logininfo SET name = '$newname', username ='$newusername'  WHERE ID = '$userid'";
-                            $res = $conn->query($sql);
-                        }
-                        $conn->close();
+                                    include 'connect.php';
+                                    if (isset($_POST['subBtn'])) {
+                                        $newname = $_POST['newname'];
+                                        $newusername = $_POST['userName'];
+                                        $userid = $_SESSION['ID'];
+                                        $result = $conn->query($sql);
+                                        $sql = "UPDATE logininfo SET name = '$newname', username ='$newusername'  WHERE ID = '$userid'";
+                                        $res = $conn->query($sql);
+                                    }
+                                    $conn->close();
                         ?>
 
                         <div id="records2">
@@ -171,20 +223,20 @@
                                     </tr>
                                 </thead>
                                 <?php
-                                include 'connect.php';
-                                if (isset($_SESSION['ID'])) {
-                                    $sql = "SELECT * FROM attrecord WHERE userid = '" .  $_SESSION['ID'] . "'";
-                                    $result = $conn->query($sql);
-                                    if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) { ?>
+                                    include 'connect.php';
+                                    if (isset($_SESSION['ID'])) {
+                                        $sql = "SELECT * FROM attrecord WHERE userid = '" .  $_SESSION['ID'] . "'";
+                                        $result = $conn->query($sql);
+                                        if ($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) { ?>
                                         <?php echo "<tr><td>{$row['date']}</td><td>{$row['entrytime']}</td><td>{$row['exittime']}</td></tr>\n";
-                                        } ?>
+                                            } ?>
                                 <?php
-                                    } else {
-                                        echo "0 results";
+                                        } else {
+                                            echo "0 results";
+                                        }
+                                        $conn->close();
                                     }
-                                    $conn->close();
-                                }
 
                                 ?>
                         </div>
@@ -197,7 +249,10 @@
                 jQuery('#example').DataTable();
             });
         </script>
-    <?php } ?>
+    <?php } else {
+                                    // Nothing to do 
+                                } ?>
+<?php } ?>
 
 </body>
 
