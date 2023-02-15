@@ -113,3 +113,13 @@ body {
 #op441 {
     margin-top: 750px;
 }
+
+.olapp{
+    padding-top: 15px;
+    font-size: 17px;
+}
+
+#dropselect{
+    padding: 5px;
+    border-radius: 4px;
+}

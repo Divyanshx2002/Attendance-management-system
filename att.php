@@ -82,9 +82,12 @@
                                                         <lable class="form-label" for="">Password</lable>
                                                         <input class="form-control" type="password" id="exit" name="password" required>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <lable class="form-label" for="">Role</lable>
-                                                        <input class="form-control" type="text" id="exit" value="employ" name="Role" required>
+                                                    <div id="drop12" class="form-group">
+                                                        <label class="olapp" for="">Role :</label>
+                                                        <select name="Role" id="dropselect">
+                                                            <option value="employ">Employ</option>
+                                                            <option value="admin">Admin</option>
+                                                        </select>
                                                     </div>
                                                     <div class="form-group" id="btn1">
                                                         <button class="btn btn-success w-100" type="submit" id="subbtn" name="dasboard-btn">Submit</button>
@@ -105,6 +108,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <script>
+                                        if (window.history.replaceState) {
+                                            window.history.replaceState(null, null, window.location.href);
+                                        }
+                                    </script>
                                 <?php } elseif ($userRole != "" && $userRole == "employ") { ?>
                                     <li class="noO">
                                         <a href="att.php"><i class="fs-4 bi-speedometer2"></i> <span id="opopop" class="ms-1 d-none d-sm-inline">Attendance</span> </a>
@@ -118,7 +126,7 @@
                                     <div class="dropdown pb-4" id="op441">
                                         <a href="#" class="d-flex align-items-center text-black text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                                             <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                                            <span class="d-none d-sm-inline mx-1"><?php echo  $_SESSION['username']; ?>
+                                            <span class="d-none d-sm-inline mx-1" id="tochange"><?php echo  $_SESSION['username']; ?>
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow ">
                                             <li class="gonnaedit">
@@ -244,6 +252,11 @@
                 </div>
             </div>
         </section>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
         <script>
             jQuery(document).ready(function() {
                 jQuery('#example').DataTable();
